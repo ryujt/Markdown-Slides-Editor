@@ -4,7 +4,12 @@ import data from "./data";
 
 const SlidersContainer = () => {
   const { markdowns } = data;
-  const marp = new Marp();
+  const marp = new Marp({
+    html: {
+      p: [],
+      img: ["src"],
+    },
+  });
   const { html, css } = marp.render(markdowns.join("\n---\n"));
   return <Sliders content={html} style={css} />;
 };

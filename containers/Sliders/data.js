@@ -101,6 +101,13 @@ sequenceDiagram
 
 \`\`\`
 
+---
+
+# HTML (allowed in new Marp)
+<p>
+<img src="https://files.readme.io/6744632-gitlab-logo-gray-rgb.png"/>
+</p>
+
 `,
   ],
 };

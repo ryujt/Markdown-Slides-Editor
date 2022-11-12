@@ -23,7 +23,6 @@ const Sliders = ({ content, style }) => {
     <div>
       <button onClick={save}>Export</button>
       <Head>
-        <link rel="stylesheet" href="github-markdown.css" />
         <style>{style}</style>
       </Head>
       <div dangerouslySetInnerHTML={{ __html: content }}></div>
