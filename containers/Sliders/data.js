@@ -15,6 +15,7 @@ You can convert into PDF slide deck through Chrome.
 `,
     `
 # Code Auto scaling Demo
+# Code Auto scaling Demo2
 \`\`\`javascript
 .open{
     width:24px;
@@ -52,19 +53,6 @@ You can convert into PDF slide deck through Chrome.
   .item{
     padding:10px
   }
-
-  <div id="focusDetector">
-  <div class="open" tabIndex="0"></div>
-  <div id="dropDownMenu">
-    <div id="closeButton"></div>
-    <div id=itemsWrapper tabIndex="0">
-      <div class="item">Home</div>
-      <div class="item">Blog</div>
-      <div class="item">FAQ</div>
-      <div class="item">Login</div>
-    </div>
-  </div>
-</div>
 \`\`\`
 `,
     `
@@ -73,41 +61,47 @@ You can convert into PDF slide deck through Chrome.
 
 \`\`\`mermaid
 sequenceDiagram
-       
-    Note left of UI: onClick
-    par Call Reducer
-        UI->>Redux: 1.dispatch(ACTION_LOAD_DATA)
-    and Call Redux-saga
-        UI->>Redux-saga: 1.dispatch(ACTION_LOAD_DATA)
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
     end
-    
-    Redux->>UI: 2.loading=true
-    
-    opt Need Current State
-        Redux-saga-->>+Redux: 3.yield select(state=>state)
-        Redux-->>-Redux-saga: 4.data
-    end
-    
-    Redux-saga->>+Server: 5.yield call(api)
-    Server-->>-Redux-saga: 6.response
-    
-    alt SUCCESS
-        Redux-saga->>Redux: 7.yield put(ACTION_LOAD_DATA_SUCCESS)
-        Redux->>UI: 8.loading=false, data
-    else FAIL
-        Redux-saga->>Redux: 7.yield put(ACTION_LOAD_DATA_FAIL)
-        Redux->>UI: 8.loading=false, error message 
-    end
+    Note right of John: Rational thoughts <br/>prevail!
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!
+\`\`\`
+`,
+    `
+
+# Mermaid diagram2
+
+\`\`\`mermaid
+gantt
+dateFormat  YYYY-MM-DD
+title Adding GANTT diagram to mermaid
+excludes weekdays 2014-01-10
+
+section A section
+Completed task            :done,    des1, 2014-01-06,2014-01-08
+Active task               :active,  des2, 2014-01-09, 3d
+Future task               :         des3, after des2, 5d
+Future task2               :         des4, after des3, 5d
+\`\`\`
+`,
+    `
+
+# Mermaid diagram3
+
+\`\`\`mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
 
 \`\`\`
-
----
-
-# HTML (allowed in new Marp)
-<p>
-<img src="https://files.readme.io/6744632-gitlab-logo-gray-rgb.png"/>
-</p>
-
 `,
   ],
 };
