@@ -12,7 +12,8 @@ Marpit is the skinny framework for creating slide deck from Markdown.
 You can convert into PDF slide deck through Chrome.
 
 ![bg left](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-`,`
+`,
+    `
 # Code Auto scaling Demo
 \`\`\`javascript
 .open{
@@ -65,7 +66,8 @@ You can convert into PDF slide deck through Chrome.
   </div>
 </div>
 \`\`\`
-`,`
+`,
+    `
 
 # Mermaid diagram
 
@@ -99,7 +101,7 @@ sequenceDiagram
 
 \`\`\`
 
-`
+`,
   ],
 };
 
