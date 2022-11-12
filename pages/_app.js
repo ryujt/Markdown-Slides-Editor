@@ -1,5 +1,6 @@
-import '../styles/globals.css'
 import { Provider } from "react-redux";
+import { appWithTranslation } from 'next-i18next';
+import '../styles/globals.css'
 import store from "../config/configureStore";
 
 function MyApp({ Component, pageProps }) {
@@ -10,4 +11,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default appWithTranslation(MyApp);
