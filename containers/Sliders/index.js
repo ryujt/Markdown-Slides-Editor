@@ -1,9 +1,15 @@
 import { Marp } from "@marp-team/marp-core";
-import Sliders from "../../components/Sliders";
-import data from "./data";
 import mermaidAPI from "mermaid";
 import { useEffect, useState } from "react";
-import _ from "underscore";
+
+import data from "./data";
+import Sliders from "../../components/Sliders";
+import { findContentInTag } from "../../helpers/regexFinder";
+import { MERMAID_OPEN_TAG, MERMAID_CLOSE_TAG } from "../../constants/mermaid";
+import {
+  INLINE_STYLE_OPEN_TAG,
+  INLINE_STYLE_CLOSE_TAG,
+} from "../../constants/inlineStyle";
 
 const SlidersContainer = () => {
   const [content, setContent] = useState("");
@@ -18,17 +24,27 @@ const SlidersContainer = () => {
     const marp = new Marp();
     const { html, css } = marp.render(markdowns.join("\n---\n"));
     let marpHtml = html;
-    const openTag = `<code class="language-mermaid">`;
-    const closeTag = `</code>`;
-    const regex = `${openTag}(.|\n)*?${closeTag}`;
-    const founds = [...html.matchAll(regex)]?.map((found) => found[0]);
 
-    founds?.forEach((found, index) => {
-      const markdownHTML = found?.replace(openTag, "").replace(closeTag, "");
-      const markdownText = _.unescape(markdownHTML);
-      const svgGraph = mermaidAPI.render(`id${index}`, markdownText);
-      marpHtml = marpHtml.replace(found, svgGraph);
-    });
+    findContentInTag(MERMAID_OPEN_TAG, MERMAID_CLOSE_TAG, marpHtml)?.forEach(
+      (found, index) => {
+        try {
+          const { raw, mermaid } = found;
+          const svgGraph = mermaidAPI.render(`id${index}`, mermaid);
+          const svgInlineStyle = findContentInTag(
+            INLINE_STYLE_OPEN_TAG,
+            INLINE_STYLE_CLOSE_TAG,
+            svgGraph,
+          )[0];
+          const woInlineStyleSvgGraph = svgGraph.replace(
+            svgInlineStyle.raw,
+            "",
+          );
+          marpHtml = marpHtml.replace(raw, woInlineStyleSvgGraph);
+        } catch (e) {
+          console.warn(e);
+        }
+      },
+    );
     setContent(marpHtml);
     setStyle(css);
   }, []);
