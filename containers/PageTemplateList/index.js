@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTemplates } from "../../redux/actions/pages";
 import PageTemplateList from "../../components/PageTemplateList";
+import { addPage } from "../../redux/actions/pages";
 
 const PageTemplateListContainer = () => {
   const { templates } = useSelector((state) => state.pages);
@@ -11,8 +12,8 @@ const PageTemplateListContainer = () => {
     dispatch(fetchTemplates());
   }, []);
 
-  const onClick = (content) => {
-    console.log(content);
+  const onClick = (markdown) => {
+    dispatch(addPage({ markdown }));
   };
 
   return <PageTemplateList templates={templates} onClick={onClick} />;

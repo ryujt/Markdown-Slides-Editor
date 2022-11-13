@@ -14,14 +14,14 @@ const newId = (() => {
   };
 })();
 
-function* addPage({ text }) {
+function* addPage({ markdown }) {
   const { pages } = yield select((state) => state.pages);
   yield put({
     type: ACTION_ADD_SLIDE_PAGE_SUC,
     payload: [
       ...pages,
       {
-        text,
+        markdown,
         id: newId(),
       },
     ],

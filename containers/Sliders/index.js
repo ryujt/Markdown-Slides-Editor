@@ -1,6 +1,7 @@
 import { Marp } from "@marp-team/marp-core";
 import mermaidAPI from "mermaid";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import Sliders from "../../components/Sliders";
 import { findContentInTag } from "../../helpers/regexFinder";
@@ -11,20 +12,25 @@ import {
 } from "../../constants/htmlTag";
 
 const SlidersContainer = () => {
-  const [content, setContent] = useState("");
-  const [style, setStyle] = useState("");
+  const { pages } = useSelector((state) => state.pages);
+  const [slides, setSlides] = useState({
+    content: "",
+    style: "",
+  });
 
   useEffect(() => {
     mermaidAPI.initialize({
       startOnLoad: true,
     });
+  });
 
-    const markdowns = ["# Slide-Editor"];
+  useEffect(() => {
+    const markdowns = pages.map((data) => data?.markdown);
     const marp = new Marp();
     const { html, css } = marp.render(markdowns.join("\n---\n"));
-    let marpHtml = html;
+    let content = html;
 
-    findContentInTag(MERMAID_OPEN_TAG, MERMAID_CLOSE_TAG, marpHtml)?.forEach(
+    findContentInTag(MERMAID_OPEN_TAG, MERMAID_CLOSE_TAG, content)?.forEach(
       (found, index) => {
         try {
           const { raw, mermaid } = found;
@@ -38,17 +44,16 @@ const SlidersContainer = () => {
             svgInlineStyle.raw,
             "",
           );
-          marpHtml = marpHtml.replace(raw, woInlineStyleSvgGraph);
+          content = content.replace(raw, woInlineStyleSvgGraph);
         } catch (e) {
           console.warn(e);
         }
       },
     );
-    setContent(marpHtml);
-    setStyle(css);
-  }, []);
+    setSlides({ content, style: css });
+  }, [pages]);
 
-  return <Sliders content={content} style={style} />;
+  return <Sliders content={slides.content} style={slides.style} />;
 };
 
 export default SlidersContainer;
