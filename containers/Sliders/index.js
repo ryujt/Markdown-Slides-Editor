@@ -2,14 +2,13 @@ import { Marp } from "@marp-team/marp-core";
 import mermaidAPI from "mermaid";
 import { useEffect, useState } from "react";
 
-import data from "./data";
 import Sliders from "../../components/Sliders";
 import { findContentInTag } from "../../helpers/regexFinder";
-import { MERMAID_OPEN_TAG, MERMAID_CLOSE_TAG } from "../../constants/mermaid";
+import { MERMAID_OPEN_TAG, MERMAID_CLOSE_TAG } from "../../constants/htmlTag";
 import {
   INLINE_STYLE_OPEN_TAG,
   INLINE_STYLE_CLOSE_TAG,
-} from "../../constants/inlineStyle";
+} from "../../constants/htmlTag";
 
 const SlidersContainer = () => {
   const [content, setContent] = useState("");
@@ -20,7 +19,7 @@ const SlidersContainer = () => {
       startOnLoad: true,
     });
 
-    const { markdowns } = data;
+    const markdowns = ["# Slide-Editor"];
     const marp = new Marp();
     const { html, css } = marp.render(markdowns.join("\n---\n"));
     let marpHtml = html;

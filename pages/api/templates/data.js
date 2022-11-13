@@ -1,73 +1,73 @@
-const mockupData = {
-  markdowns: [
-    `
+const cover = `
+<!-- paginate: false -->
 # Marp + Mermaid Editor
 ## Author
 ![bg left:33% fit](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+`;
 
-`,
-    `
+const innerPage = `
 <!-- paginate: true -->
 # Overview
+- [go to slide 1](#1)
 1. Images Alignment
 2. Code Block
 3. Table
 4. Mermaid diagram
-
     * sequenceDiagram
     * gantt
     * graph
+`;
 
-`,
-    `
+const images = `
 # Images Alignment
+`;
 
-`,
-    `
+const codeblock = `
 # Code Block
 
 - \`demo.css\`
+
 \`\`\`css
 .open{
     width:24px;
     height:24px;
     text-align: center;
     border:black 1px solid;
-  }
-  #focusDetector:focus-within .open{
+}
+#focusDetector:focus-within .open{
     transform: rotate(90deg);
     pointer-events:none;
-  }
-  
-  #closeButton{
+}
+
+#closeButton{
     width:24px;
     height:24px;
     background:red;
     text-align: center;
     width:100%;
-  }
-  
-  #focusDetector:focus-within #dropDownMenu{
+}
+
+#focusDetector:focus-within #dropDownMenu{
     display:flex;
-  }
-  #dropDownMenu{
+}
+#dropDownMenu{
     display:none;
     flex-direction:column;
     width: fit-content;
     background:gray;
-  }
-  
-  #itemsWrapper{
-    background:yellow;
-  }
-  
-  .item{
-    padding:10px
-  }
-\`\`\`
-`,
-    `
+}
 
+#itemsWrapper{
+    background:yellow;
+}
+
+.item{
+    padding:10px
+}
+\`\`\`
+`;
+
+const table = `
 # Table
 
 |State|File|Description|
@@ -79,15 +79,14 @@ const mockupData = {
 |M|package.json||
 |A|pages/isomorphic-git/index.tsx||
 |M|yarn.lock||
+`;
 
-`,
-    `
-
+const sequenceDiagram = `
 # Mermaid diagram - sequenceDiagram
-
+  
 \`\`\`mermaid
 sequenceDiagram
-       
+        
     Note left of UI: onClick
     par Call Reducer
         UI->>Redux: 1.dispatch(ACTION_LOAD_DATA)
@@ -112,13 +111,12 @@ sequenceDiagram
         Redux-saga->>Redux: 7.yield put(ACTION_LOAD_DATA_FAIL)
         Redux->>UI: 8.loading=false, error message 
     end
-
 \`\`\`
-`,
-    `
+`;
 
-# Mermaid diagram2 - gantt
-
+const gantt = `
+# Mermaid diagram - gantt
+  
 \`\`\`mermaid
 gantt
     title  
@@ -152,11 +150,10 @@ gantt
     debug               :d1, after c5  , 3d
 
 \`\`\`
-`,
-    `
+`;
 
-# Mermaid diagram3 - graph
-
+const flowchart = `
+# Mermaid diagram - flowchart
 \`\`\`mermaid
 graph TD;
     A-->B;
@@ -165,10 +162,15 @@ graph TD;
     C-->D;
 
 \`\`\`
+`;
 
-- [Jump to slide 1](#1)
-`,
-  ],
+export default {
+  cover,
+  innerPage,
+  images,
+  codeblock,
+  table,
+  sequenceDiagram,
+  gantt,
+  flowchart,
 };
-
-export default mockupData;
