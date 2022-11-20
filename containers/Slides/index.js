@@ -1,15 +1,14 @@
 import { Marp } from "@marp-team/marp-core";
-import mermaidAPI from "mermaid";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-
-import Slides from "@/components/Slides";
-import { MERMAID_CLOSE_TAG, MERMAID_OPEN_TAG } from "@/constants/htmlTag";
+import Slides from "components/Slides";
+import { MERMAID_CLOSE_TAG, MERMAID_OPEN_TAG } from "constants/htmlTag";
 import {
   INLINE_STYLE_CLOSE_TAG,
   INLINE_STYLE_OPEN_TAG,
-} from "@/constants/htmlTag";
-import { findContentInTag } from "@/helpers/regexFinder";
+} from "constants/htmlTag";
+import { findContentInTag } from "helpers/regexFinder";
+import mermaidAPI from "mermaid";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const SlidesContainer = () => {
   const { pages } = useSelector((state) => state.pages);

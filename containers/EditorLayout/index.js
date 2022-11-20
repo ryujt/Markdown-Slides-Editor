@@ -1,4 +1,4 @@
-import EditorLayout from "@/components/EditorLayout";
+import EditorLayout from "components/EditorLayout";
 
 const EditorLayoutContainer = ({ toolBar, textEditor, slidPreview }) => {
   return (

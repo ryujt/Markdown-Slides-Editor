@@ -5,7 +5,7 @@ import TextEditor from "../TextEditor";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4.2px;
+  padding: 0px 10.25px;
 `;
 
 export const TextAreaWrapper = styled.div`

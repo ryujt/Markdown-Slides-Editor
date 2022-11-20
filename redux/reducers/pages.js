@@ -1,10 +1,9 @@
-import produce from "immer";
-
 import {
   ACTION_ADD_SLIDE_PAGE_SUC,
   ACTION_EDIT_SLIDE_PAGE_SUC,
   ACTION_FETCH_PAGE_TEMPLATES_SUC,
-} from "@/constants/pages";
+} from "constants/pages";
+import produce from "immer";
 
 const initialState = {
   pages: [],

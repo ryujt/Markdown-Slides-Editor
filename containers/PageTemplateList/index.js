@@ -1,9 +1,8 @@
+import PageTemplateList from "components/PageTemplateList";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import PageTemplateList from "@/components/PageTemplateList";
-import { fetchTemplates } from "@/redux/actions/pages";
-import { addPage } from "@/redux/actions/pages";
+import { fetchTemplates } from "redux/actions/pages";
+import { addPage } from "redux/actions/pages";
 
 const PageTemplateListContainer = () => {
   const { templates } = useSelector((state) => state.pages);
