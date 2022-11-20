@@ -1,7 +1,8 @@
-import { Provider } from "react-redux";
 import { appWithTranslation } from "next-i18next";
-import "../styles/globals.css";
+import { Provider } from "react-redux";
+
 import store from "../config/configureStore";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (

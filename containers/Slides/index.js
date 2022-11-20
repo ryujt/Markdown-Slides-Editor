@@ -3,15 +3,15 @@ import mermaidAPI from "mermaid";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import Sliders from "../../components/Sliders";
-import { findContentInTag } from "../../helpers/regexFinder";
-import { MERMAID_OPEN_TAG, MERMAID_CLOSE_TAG } from "../../constants/htmlTag";
+import Slides from "@/components/Slides";
+import { MERMAID_CLOSE_TAG, MERMAID_OPEN_TAG } from "@/constants/htmlTag";
 import {
-  INLINE_STYLE_OPEN_TAG,
   INLINE_STYLE_CLOSE_TAG,
-} from "../../constants/htmlTag";
+  INLINE_STYLE_OPEN_TAG,
+} from "@/constants/htmlTag";
+import { findContentInTag } from "@/helpers/regexFinder";
 
-const SlidersContainer = () => {
+const SlidesContainer = () => {
   const { pages } = useSelector((state) => state.pages);
   const [slides, setSlides] = useState({
     content: "",
@@ -53,7 +53,7 @@ const SlidersContainer = () => {
     setSlides({ content, style: css });
   }, [pages]);
 
-  return <Sliders content={slides.content} style={slides.style} />;
+  return <Slides content={slides.content} style={slides.style} />;
 };
 
-export default SlidersContainer;
+export default SlidesContainer;

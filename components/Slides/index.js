@@ -1,8 +1,8 @@
-import Head from "next/head";
 import { saveAs } from "file-saver";
 import moment from "moment";
+import Head from "next/head";
 
-const Sliders = ({ content, style }) => {
+const Slides = ({ content, style }) => {
   const filename = "demo";
   const save = () => {
     const htmlFile = `
@@ -30,4 +30,4 @@ const Sliders = ({ content, style }) => {
   );
 };
 
-export default Sliders;
+export default Slides;
