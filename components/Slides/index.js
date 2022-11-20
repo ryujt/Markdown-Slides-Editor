@@ -1,6 +1,5 @@
 import { saveAs } from "file-saver";
 import moment from "moment";
-import Head from "next/head";
 
 const Slides = ({ content, style }) => {
   const filename = "demo";
@@ -21,10 +20,8 @@ const Slides = ({ content, style }) => {
 
   return (
     <div>
-      <button onClick={save}>Export</button>
-      <Head>
-        <style>{style}</style>
-      </Head>
+      <style>{style}</style>
+      <button onClick={save}>save</button>
       <div dangerouslySetInnerHTML={{ __html: content }}></div>
     </div>
   );

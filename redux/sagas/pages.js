@@ -4,6 +4,8 @@ import * as pages from "@/api/pages";
 import {
   ACTION_ADD_SLIDE_PAGE,
   ACTION_ADD_SLIDE_PAGE_SUC,
+  ACTION_EDIT_SLIDE_PAGE,
+  ACTION_EDIT_SLIDE_PAGE_SUC,
   ACTION_FETCH_PAGE_TEMPLATES,
   ACTION_FETCH_PAGE_TEMPLATES_SUC,
 } from "@/constants/pages";
@@ -29,6 +31,24 @@ function* addPage({ markdown }) {
   });
 }
 
+function* editPage({ markdown, id }) {
+  const { pages } = yield select((state) => state.pages);
+  yield put({
+    type: ACTION_EDIT_SLIDE_PAGE_SUC,
+    payload: pages.map((page) => {
+      if (page?.id === id) {
+        return {
+          ...page,
+          markdown,
+          id,
+        };
+      } else {
+        return { ...page };
+      }
+    }),
+  });
+}
+
 function* fetchTemplates() {
   const { templates } = yield call(pages.fetchTemplates);
   if (templates) {
@@ -41,5 +61,6 @@ function* fetchTemplates() {
 
 export default [
   takeEvery(ACTION_ADD_SLIDE_PAGE, addPage),
+  takeEvery(ACTION_EDIT_SLIDE_PAGE, editPage),
   takeEvery(ACTION_FETCH_PAGE_TEMPLATES, fetchTemplates),
 ];

@@ -1,12 +1,14 @@
-import PageLayout from "@/containers/PageLayout";
+import EditorLayout from "@/containers/EditorLayout";
 import PageTemplateListContainer from "@/containers/PageTemplateList";
 import SlidesContainer from "@/containers/Slides";
+import SlidesTextAreaContainer from "@/containers/SlidesTextArea";
 
 export default function App() {
   return (
-    <PageLayout>
-      <PageTemplateListContainer />
-      <SlidesContainer />
-    </PageLayout>
+    <EditorLayout
+      toolBar={<PageTemplateListContainer />}
+      textEditor={<SlidesTextAreaContainer />}
+      slidPreview={<SlidesContainer />}
+    />
   );
 }

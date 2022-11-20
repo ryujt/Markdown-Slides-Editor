@@ -79,6 +79,20 @@ const table = `
 |M|package.json||
 |A|pages/isomorphic-git/index.tsx||
 |M|yarn.lock||
+|M|.github/workflows/GithubCICD.yml||
+|M|.gitignore||
+|M|README.md||
+|A|lib/isomorphic-git.ts||
+|M|package.json||
+|A|pages/isomorphic-git/index.tsx||
+|M|yarn.lock||
+|M|.github/workflows/GithubCICD.yml||
+|M|.gitignore||
+|M|README.md||
+|A|lib/isomorphic-git.ts||
+|M|package.json||
+|A|pages/isomorphic-git/index.tsx||
+|M|yarn.lock||
 `;
 
 const sequenceDiagram = `

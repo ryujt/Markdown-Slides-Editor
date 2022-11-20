@@ -30,26 +30,31 @@ const SlidesContainer = () => {
     const { html, css } = marp.render(markdowns.join("\n---\n"));
     let content = html;
 
+    const parseMermaid2HTML = (id, mermaid) => {
+      const svgGraph = mermaidAPI.render(id, mermaid);
+      const svgInlineStyle = findContentInTag(
+        INLINE_STYLE_OPEN_TAG,
+        INLINE_STYLE_CLOSE_TAG,
+        svgGraph,
+      )[0];
+      const woInlineStyleSvgGraph = svgGraph.replace(svgInlineStyle.raw, "");
+      return woInlineStyleSvgGraph;
+    };
+
     findContentInTag(MERMAID_OPEN_TAG, MERMAID_CLOSE_TAG, content)?.forEach(
       (found, index) => {
         try {
           const { raw, mermaid } = found;
-          const svgGraph = mermaidAPI.render(`id${index}`, mermaid);
-          const svgInlineStyle = findContentInTag(
-            INLINE_STYLE_OPEN_TAG,
-            INLINE_STYLE_CLOSE_TAG,
-            svgGraph,
-          )[0];
-          const woInlineStyleSvgGraph = svgGraph.replace(
-            svgInlineStyle.raw,
-            "",
+          content = content.replace(
+            raw,
+            parseMermaid2HTML(`id${index}`, mermaid),
           );
-          content = content.replace(raw, woInlineStyleSvgGraph);
         } catch (e) {
           console.warn(e);
         }
       },
     );
+
     setSlides({ content, style: css });
   }, [pages]);
 
