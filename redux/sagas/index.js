@@ -1,6 +1,7 @@
-import { all } from "redux-saga/effects"
-import demo from "./demo" // remove this in your app
+import { all } from "redux-saga/effects";
+
+import pages from "./pages";
 
 export default function* rootSaga() {
-    yield all([...demo])
+  yield all([...pages]);
 }
