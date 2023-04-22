@@ -29,8 +29,8 @@ const SlidesContainer = () => {
     const { html, css } = marp.render(markdowns.join("\n---\n"));
     let content = html;
 
-    const parseMermaid2HTML = (id, mermaid) => {
-      const svgGraph = mermaidAPI.render(id, mermaid);
+    const parseMermaid2HTML = async (id, mermaid) => {
+      const { svg: svgGraph } = await mermaidAPI.render(id, mermaid);
       const svgInlineStyle = findContentInTag(
         INLINE_STYLE_OPEN_TAG,
         INLINE_STYLE_CLOSE_TAG,
@@ -40,21 +40,25 @@ const SlidesContainer = () => {
       return woInlineStyleSvgGraph;
     };
 
-    findContentInTag(MERMAID_OPEN_TAG, MERMAID_CLOSE_TAG, content)?.forEach(
-      (found, index) => {
+    const parserPromises = findContentInTag(
+      MERMAID_OPEN_TAG,
+      MERMAID_CLOSE_TAG,
+      content,
+    )?.map((found, index) => {
+      return new Promise(async (resolve, reject) => {
         try {
           const { raw, mermaid } = found;
-          content = content.replace(
-            raw,
-            parseMermaid2HTML(`id${index}`, mermaid),
-          );
+          const mermaidHtml = await parseMermaid2HTML(`id${index}`, mermaid);
+          content = content.replace(raw, mermaidHtml);
+          resolve();
         } catch (e) {
           console.warn(e);
+          reject();
         }
-      },
-    );
+      });
+    });
 
-    setSlides({ content, style: css });
+    Promise.all(parserPromises).then(() => setSlides({ content, style: css }));
   }, [pages]);
 
   return <Slides content={slides.content} style={slides.style} />;
