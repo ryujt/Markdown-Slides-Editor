@@ -29,8 +29,8 @@ const SlidesContainer = () => {
     const { html, css } = marp.render(markdowns.join("\n---\n"));
     let content = html;
 
-    const parseMermaid2HTML = (id, mermaid) => {
-      const svgGraph = mermaidAPI.render(id, mermaid);
+    const parseMermaid2HTML = async (id, mermaid) => {
+      const { svg: svgGraph } = await mermaidAPI.render(id, mermaid);
       const svgInlineStyle = findContentInTag(
         INLINE_STYLE_OPEN_TAG,
         INLINE_STYLE_CLOSE_TAG,
@@ -41,12 +41,12 @@ const SlidesContainer = () => {
     };
 
     findContentInTag(MERMAID_OPEN_TAG, MERMAID_CLOSE_TAG, content)?.forEach(
-      (found, index) => {
+      async (found, index) => {
         try {
           const { raw, mermaid } = found;
           content = content.replace(
             raw,
-            parseMermaid2HTML(`id${index}`, mermaid),
+            await parseMermaid2HTML(`id${index}`, mermaid),
           );
         } catch (e) {
           console.warn(e);
