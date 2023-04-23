@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@marp-team/marp-core": "^3.3.3",
+    "ace-builds": "^1.18.0",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.2",
     "file-saver": "^2.0.5",
@@ -27,6 +28,7 @@
     "next": "13.0.2",
     "next-i18next": "^12.1.0",
     "react": "18.2.0",
+    "react-ace": "^10.1.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "redux-saga": "^1.2.1",
