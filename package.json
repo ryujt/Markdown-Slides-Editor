@@ -10,12 +10,6 @@
     "eslint": "eslint \"./**/*.+(ts|js|tsx)\" --fix",
     "format": "prettier \"./**/*.+(ts|js|tsx)\" --write"
   },
-  "lint-staged": {
-    "**/*.{ts,js,jsx,tsx}": [
-      "yarn format",
-      "yarn eslint"
-    ]
-  },
   "dependencies": {
     "@marp-team/marp-core": "^3.3.3",
     "ace-builds": "^1.18.0",
@@ -43,8 +37,6 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jest": "^27.1.3",
     "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
   }
 }
