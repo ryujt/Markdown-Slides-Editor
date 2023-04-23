@@ -1,11 +1,17 @@
-import { TextArea, TextAreaWrapper, Wrapper } from "./styled";
+import dynamic from "next/dynamic";
+
+import { TextAreaWrapper, Wrapper } from "./styled";
+
+const AceEditor = dynamic(() => import("./AceEditor/index.js"), {
+  ssr: false,
+});
 
 const SlidesTextArea = ({ pages, onChangeFactory }) => {
   return (
     <Wrapper>
       {pages.map(({ markdown, id }, index) => (
         <TextAreaWrapper key={index}>
-          <TextArea value={markdown} onChange={onChangeFactory(id)} />
+          <AceEditor value={markdown} onChange={onChangeFactory(id)} />
         </TextAreaWrapper>
       ))}
     </Wrapper>

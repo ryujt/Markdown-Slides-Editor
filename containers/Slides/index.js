@@ -45,12 +45,13 @@ const SlidesContainer = () => {
       MERMAID_CLOSE_TAG,
       content,
     )?.map((found, index) => {
-      return new Promise(async (resolve, reject) => {
+      return new Promise((resolve, reject) => {
         try {
           const { raw, mermaid } = found;
-          const mermaidHtml = await parseMermaid2HTML(`id${index}`, mermaid);
-          content = content.replace(raw, mermaidHtml);
-          resolve();
+          parseMermaid2HTML(`id${index}`, mermaid).then((mermaidHtml) => {
+            content = content.replace(raw, mermaidHtml);
+            resolve();
+          });
         } catch (e) {
           console.warn(e);
           reject();
