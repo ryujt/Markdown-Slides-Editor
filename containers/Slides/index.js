@@ -30,14 +30,18 @@ const SlidesContainer = () => {
     let content = html;
 
     const parseMermaid2HTML = async (id, mermaid) => {
-      const { svg: svgGraph } = await mermaidAPI.render(id, mermaid);
-      const svgInlineStyle = findContentInTag(
-        INLINE_STYLE_OPEN_TAG,
-        INLINE_STYLE_CLOSE_TAG,
-        svgGraph,
-      )[0];
-      const woInlineStyleSvgGraph = svgGraph.replace(svgInlineStyle.raw, "");
-      return woInlineStyleSvgGraph;
+      try {
+        const { svg: svgGraph } = await mermaidAPI.render(id, mermaid);
+        const svgInlineStyle = findContentInTag(
+          INLINE_STYLE_OPEN_TAG,
+          INLINE_STYLE_CLOSE_TAG,
+          svgGraph,
+        )[0];
+        const woInlineStyleSvgGraph = svgGraph.replace(svgInlineStyle.raw, "");
+        return woInlineStyleSvgGraph;
+      } catch (e) {
+        return e;
+      }
     };
 
     const parserPromises = findContentInTag(
