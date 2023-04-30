@@ -19,11 +19,17 @@ const innerPage = `
 `;
 
 const images = `
-# Images Alignment
+<style>
+section > p  {
+  display:flex;
+}
+</style>
 
-![left:33% fit](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-![right:33% fit](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-![left:33% fit](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+# CSS Style
+
+![](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+![](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+
 `;
 
 const codeblock = `

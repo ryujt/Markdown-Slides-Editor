@@ -8,7 +8,7 @@ import produce from "immer";
 const initialState = {
   html: null,
   pages: [],
-  templates: [],
+  templates: null,
 };
 
 const pages = (state = initialState, action) =>

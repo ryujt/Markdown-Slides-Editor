@@ -18,14 +18,18 @@ const Tools = {
 
 const ToolBar = () => {
   const { html } = useSelector((state) => state.pages);
-  const [type, setType] = useState(TOOL_TYPE.none);
+  const [type, setType] = useState(TOOL_TYPE.templates);
+
+  const setTool = (newType) => {
+    if (newType === type) setType(TOOL_TYPE.none);
+    else setType(newType);
+  };
 
   const Tool = Tools[type] || null;
-
   return (
     <Wrapper>
       <IconList>
-        <Icon.add onClick={() => setType(TOOL_TYPE.templates)} />
+        <Icon.add onClick={() => setTool(TOOL_TYPE.templates)} />
         {html && <Icon.download onClick={() => download("slide", html)} />}
         {html && <Icon.newTab onClick={() => openHtmlWindow(html)} />}
       </IconList>

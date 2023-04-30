@@ -3,16 +3,18 @@ import styled from "styled-components";
 export const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 95vh;
+  height: 100vh;
+  padding: 20px;
 `;
 
 export const Header = styled.div`
-  height: 20%;
+  flex: 0;
 `;
 
 export const WindowsWrapper = styled.div`
   display: flex;
-  height: 80%;
+  flex: 1;
+  overflow: hidden;
 `;
 
 export const Window = styled.div`

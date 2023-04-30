@@ -9,14 +9,20 @@ const PageTemplateListContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTemplates());
+    if (!templates) dispatch(fetchTemplates());
   }, []);
 
   const onClick = (markdown) => {
     dispatch(addPage({ markdown }));
   };
 
-  return <PageTemplateList templates={templates} onClick={onClick} />;
+  return (
+    <>
+      {templates && (
+        <PageTemplateList templates={templates} onClick={onClick} />
+      )}
+    </>
+  );
 };
 
 export default PageTemplateListContainer;
