@@ -1,20 +1,23 @@
 import styled from "styled-components";
 
 export const PageWrapper = styled.div`
-  height: 56.25vw;
-  width: 99vw;
+  display: flex;
+  flex-direction: column;
+  height: 95vh;
 `;
 
-export const Header = styled.div``;
+export const Header = styled.div`
+  height: 20%;
+`;
 
 export const WindowsWrapper = styled.div`
   display: flex;
-  height: 100%;
+  height: 80%;
 `;
 
 export const Window = styled.div`
   margin: 10px;
   width: 50%;
   height: 100%;
-  overflow: scroll;
+  overflow: hidden;
 `;

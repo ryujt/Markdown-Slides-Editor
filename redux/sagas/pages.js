@@ -63,13 +63,22 @@ function* editPage({ markdown, id }) {
 }
 
 function* fetchTemplates() {
-  const { templates } = yield call(pages.fetchTemplates);
-  if (templates) {
-    yield put({
-      type: ACTION_FETCH_PAGE_TEMPLATES_SUC,
-      payload: templates,
-    });
+  const { templates: raws } = yield call(pages.fetchTemplates);
+  const keys = Object.keys(raws);
+
+  const templates = {};
+  for (let index = 0; index < keys.length; index++) {
+    const key = keys[index];
+    templates[key] = {
+      raw: raws[key],
+      html: yield call(pareMarkdownToHtml, raws[key]),
+    };
   }
+
+  yield put({
+    type: ACTION_FETCH_PAGE_TEMPLATES_SUC,
+    payload: templates,
+  });
 }
 
 function* convertPageToHtml(pages) {

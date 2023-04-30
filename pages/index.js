@@ -1,12 +1,12 @@
 import EditorLayout from "containers/EditorLayout";
-import PageTemplateListContainer from "containers/PageTemplateList";
 import SlidesContainer from "containers/Slides";
 import SlidesTextAreaContainer from "containers/SlidesTextArea";
+import ToolBar from "containers/ToolBar";
 
 export default function App() {
   return (
     <EditorLayout
-      toolBar={<PageTemplateListContainer />}
+      toolBar={<ToolBar />}
       textEditor={<SlidesTextAreaContainer />}
       slidPreview={<SlidesContainer />}
     />
