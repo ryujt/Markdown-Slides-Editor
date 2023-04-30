@@ -20,6 +20,10 @@ const innerPage = `
 
 const images = `
 # Images Alignment
+
+![left:33% fit](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+![right:33% fit](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+![left:33% fit](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
 `;
 
 const codeblock = `
@@ -38,29 +42,6 @@ const codeblock = `
     transform: rotate(90deg);
     pointer-events:none;
 }
-
-#closeButton{
-    width:24px;
-    height:24px;
-    background:red;
-    text-align: center;
-    width:100%;
-}
-
-#focusDetector:focus-within #dropDownMenu{
-    display:flex;
-}
-#dropDownMenu{
-    display:none;
-    flex-direction:column;
-    width: fit-content;
-    background:gray;
-}
-
-#itemsWrapper{
-    background:yellow;
-}
-
 .item{
     padding:10px
 }
@@ -77,106 +58,89 @@ const table = `
 |M|README.md||
 |A|lib/isomorphic-git.ts||
 |M|package.json||
-|A|pages/isomorphic-git/index.tsx||
-|M|yarn.lock||
-|M|.github/workflows/GithubCICD.yml||
-|M|.gitignore||
-|M|README.md||
-|A|lib/isomorphic-git.ts||
-|M|package.json||
-|A|pages/isomorphic-git/index.tsx||
-|M|yarn.lock||
-|M|.github/workflows/GithubCICD.yml||
-|M|.gitignore||
-|M|README.md||
-|A|lib/isomorphic-git.ts||
-|M|package.json||
-|A|pages/isomorphic-git/index.tsx||
-|M|yarn.lock||
 `;
 
-const sequenceDiagram = `
-# Mermaid diagram - sequenceDiagram
-  
+const mermaidWrapper = (name, markdown) => {
+  return `
+# Mermaid diagram - ${name}
 \`\`\`mermaid
-sequenceDiagram
-        
-    Note left of UI: onClick
-    par Call Reducer
-        UI->>Redux: 1.dispatch(ACTION_LOAD_DATA)
-    and Call Redux-saga
-        UI->>Redux-saga: 1.dispatch(ACTION_LOAD_DATA)
-    end
-    
-    Redux->>UI: 2.loading=true
-    
-    opt Need Current State
-        Redux-saga-->>+Redux: 3.yield select(state=>state)
-        Redux-->>-Redux-saga: 4.data
-    end
-    
-    Redux-saga->>+Server: 5.yield call(api)
-    Server-->>-Redux-saga: 6.response
-    
-    alt SUCCESS
-        Redux-saga->>Redux: 7.yield put(ACTION_LOAD_DATA_SUCCESS)
-        Redux->>UI: 8.loading=false, data
-    else FAIL
-        Redux-saga->>Redux: 7.yield put(ACTION_LOAD_DATA_FAIL)
-        Redux->>UI: 8.loading=false, error message 
-    end
+${markdown}
 \`\`\`
-`;
+    `;
+};
 
-const gantt = `
-# Mermaid diagram - gantt
-  
-\`\`\`mermaid
-gantt
-    title  
-    dateFormat  YYYY-MM-DD
-    excludes Sunday, Saturday
-    section Setup
-    project setup   :a1, 2022-11-01, 1d
+// all mermaid templates are provided by https://github.com/mermaid-js/mermaid
+const mermaidMarkdown = {
+  sequenceDiagram: `
+    sequenceDiagram
+        Alice->>John: Hello John, how are you?
+        loop Healthcheck
+            John->>John: Fight against hypochondria
+        end
+        Note right of John: Rational thoughts!
+        John-->>Alice: Great!
+        John->>Bob: How about you?
+        Bob-->>John: Jolly good!
+    `,
+  gantt: `
+    gantt
+        section Section
+        Completed :done,    des1, 2014-01-06,2014-01-08
+        Active        :active,  des2, 2014-01-07, 3d
+        Parallel 1   :         des3, after des1, 1d
+        Parallel 2   :         des4, after des1, 1d
+        Parallel 3   :         des5, after des3, 1d
+        Parallel 4   :         des6, after des4, 1d
+    `,
+  flowchart: `
+    flowchart LR
 
-    section Functions
-        Spotify API         :c1, 2022-11-01  , 1d
+        A[Hard] -->|Text| B(Round)
+        B --> C{Decision}
+        C -->|One| D[Result 1]
+        C -->|Two| E[Result 2]
+    `,
+  classDiagram: `
+    classDiagram
+        Class01 <|-- AveryLongClass : Cool
+        <<Interface>> Class01
+        Class09 --> C2 : Where am I?
+        Class09 --* C3
+        Class09 --|> Class07
+        Class07 : equals()
+        Class07 : Object[] elementData
+        Class01 : size()
+        Class01 : int chimp
+        Class01 : int gorilla
+        class Class10 {
+        <<service>>
+        int id
+        size()
+        }
+    `,
+  stateDiagram: `
+    stateDiagram-v2
+        [*] --> Still
+        Still --> [*]
+        Still --> Moving
+        Moving --> Still
+        Moving --> Crash
+        Crash --> [*]
+  `,
+  piechart: `
+    pie
+        "Dogs" : 386
+        "Cats" : 85.9
+        "Rats" : 15
+  `,
+};
 
-        Show categories             :c2, after c1  , 1d
-        Show musics                 :c3, after c2  , 1d
-        Change category             :c6, after c2  , 1d
-        Music preview               :c4, after b3  , 1d
-        Dribbble cover              :c5, after b3  , 1d
-
-    section CSS Layouts
-        Why us                              :b1, after c1  , 1d
-        Plan                                :b4, after c1  , 1d
-        Categories                  :b5, after c1  , 1d
-        Banner                                  :b2, after b1  , 1d
-        Musics                       :b6, after b1  , 1d
-        Header                                      :b3, after b2  , 1d
-        Footer                                      :b7, after b2  , 1d
-        User experience                             :b8, after b2  , 1d
-        Error/Loading                               :b9, after b3  , 1d
-
-
-    section enhance
-    debug               :d1, after c5  , 3d
-
-\`\`\`
-`;
-
-const flowchart = `
-# Mermaid diagram - flowchart
-\`\`\`mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-
-\`\`\`
-`;
+const mermaidTemplates = Object.keys(mermaidMarkdown).reduce((dict, key) => {
+  return {
+    ...dict,
+    [key]: mermaidWrapper(key, mermaidMarkdown[key]),
+  };
+}, {});
 
 export default {
   cover,
@@ -184,7 +148,5 @@ export default {
   images,
   codeblock,
   table,
-  sequenceDiagram,
-  gantt,
-  flowchart,
+  ...mermaidTemplates,
 };
