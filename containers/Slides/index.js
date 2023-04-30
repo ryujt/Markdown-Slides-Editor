@@ -1,23 +1,19 @@
 import Slides from "components/Slides";
-import { pareMarkdownToHtml } from "helpers/markdown";
-import { useEffect, useState } from "react";
+import { download } from "helpers/file";
+import { openHtmlWindow } from "helpers/window";
 import { useSelector } from "react-redux";
 
 const SlidesContainer = () => {
-  const { pages } = useSelector((state) => state.pages);
-  const [slides, setSlides] = useState({
-    html: "",
-    style: "",
-  });
+  const { html } = useSelector((state) => state.pages);
 
-  useEffect(() => {
-    const markdowns = pages.map((data) => data?.markdown);
-    pareMarkdownToHtml(markdowns.join("\n---\n")).then(({ html, css }) =>
-      setSlides({ html, style: css }),
-    );
-  }, [pages]);
-
-  return <Slides content={slides.html} style={slides.style} />;
+  if (!html) return null;
+  return (
+    <>
+      <button onClick={() => openHtmlWindow(html)}>Preview</button>
+      <button onClick={() => download("slide", html)}>Download</button>
+      <Slides html={html} />
+    </>
+  );
 };
 
 export default SlidesContainer;
