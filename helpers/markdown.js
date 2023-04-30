@@ -55,6 +55,25 @@ mermaidAPI.initialize({
   startOnLoad: true,
 });
 
+const getHTMLFromTemplate = (body, style) => {
+  const html = `
+  <!DOCTYPE html>
+    <title>Preview</title>
+  <html>
+    <body>
+      <style>
+      body{
+        margin:0px;
+      }
+      ${style}
+      </style>
+      ${body}
+    </body>
+  </html>
+  `;
+  return html;
+};
+
 export const pareMarkdownToHtml = async (markdown) => {
   const marp = new Marp();
   const { html, css } = marp.render(markdown);
@@ -84,5 +103,5 @@ export const pareMarkdownToHtml = async (markdown) => {
     html,
   );
 
-  return { html: content, css };
+  return getHTMLFromTemplate(content, css);
 };
