@@ -8,6 +8,7 @@ const files = {
   download: `/static/icons/download.svg`,
   newTab: `/static/icons/newTab.svg`,
   add: `/static/icons/add.svg`,
+  github: `/static/icons/github.svg`,
 };
 
 const Icons = Object.keys(files).reduce((acc, key) => {

@@ -25,10 +25,18 @@ const ToolBar = () => {
     else setType(newType);
   };
 
+  const openGithubLink = () => {
+    window.open(
+      "https://github.com/yushaing-frontend/Markdown-Slides-Editor",
+      "_blank",
+    );
+  };
+
   const Tool = Tools[type] || null;
   return (
     <Wrapper>
       <IconList>
+        <Icon.github onClick={openGithubLink} />
         <Icon.add onClick={() => setTool(TOOL_TYPE.templates)} />
         {html && <Icon.download onClick={() => download("slide", html)} />}
         {html && <Icon.newTab onClick={() => openHtmlWindow(html)} />}
