@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useRef } from "react";
 
-const HtmlViewer = forwardRef(({ html }, ref) => {
+const HtmlViewer = ({ html }, ref) => {
   const iframeRef = useRef(null);
 
   useEffect(() => {
@@ -25,6 +25,6 @@ const HtmlViewer = forwardRef(({ html }, ref) => {
       )}
     </>
   );
-});
+};
 
-export default HtmlViewer;
+export default forwardRef(HtmlViewer);

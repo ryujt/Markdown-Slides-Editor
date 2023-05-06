@@ -22,10 +22,11 @@ const Editor = ({ markdowns, toolbar }) => {
       }
       views={[
         <MarkdownEditor
+          key="MarkdownEditor"
           pages={markdowns.pages}
           onChange={markdowns.onEditPage}
         />,
-        <HtmlViewer ref={viewerRef} html={markdowns.html} />,
+        <HtmlViewer key="HtmlViewer" ref={viewerRef} html={markdowns.html} />,
       ]}
     />
   );
