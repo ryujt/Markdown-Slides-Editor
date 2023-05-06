@@ -54,6 +54,8 @@ const EditorReduxWrapper = () => {
     [dispatch],
   );
 
+  const preprocessDone = !!templates;
+  if (!preprocessDone) return null;
   return (
     <Editor
       toolbar={{
