@@ -1,7 +1,8 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 
 const HtmlViewer = ({ html }, ref) => {
   const iframeRef = useRef(null);
+  const [iframeHeight, setIframeHeight] = useState(null);
 
   useEffect(() => {
     ref.current = {
@@ -14,12 +15,27 @@ const HtmlViewer = ({ html }, ref) => {
     };
   }, []);
 
+  const setScrollHeight = () => {
+    const iframe = iframeRef.current;
+    const contentHeight = iframe.contentWindow.document.body.scrollHeight;
+    setIframeHeight(contentHeight);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", setScrollHeight);
+    return () => {
+      window.removeEventListener("resize", setScrollHeight);
+    };
+  }, []);
+
   return (
     <>
       {html && (
         <iframe
+          scrolling="no"
+          onLoad={setScrollHeight}
           ref={iframeRef}
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%", height: iframeHeight }}
           srcDoc={html}
         />
       )}
