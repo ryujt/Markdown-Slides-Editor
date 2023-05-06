@@ -1,6 +1,6 @@
 import Icon from "components/Icon";
 import PageTemplateList from "containers/PageTemplateList";
-import { download } from "helpers/file";
+import { download, printIframe } from "helpers/file";
 import { openHtmlWindow } from "helpers/window";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -39,6 +39,7 @@ const ToolBar = () => {
         <Icon.github onClick={openGithubLink} />
         <Icon.add onClick={() => setTool(TOOL_TYPE.templates)} />
         {html && <Icon.download onClick={() => download("slide", html)} />}
+        {html && <Icon.print onClick={printIframe.print} />}
         {html && <Icon.newTab onClick={() => openHtmlWindow(html)} />}
       </IconList>
       {Tool && <Tool />}
