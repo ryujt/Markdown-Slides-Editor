@@ -1,12 +1,13 @@
 import { Header, PageWrapper, Window, WindowsWrapper } from "./styled";
 
-const EditorLayout = ({ toolBar, textEditor, slidPreview }) => {
+const EditorLayout = ({ header, views }) => {
   return (
     <PageWrapper>
-      <Header>{toolBar}</Header>
+      <Header>{header}</Header>
       <WindowsWrapper>
-        <Window>{textEditor}</Window>
-        <Window>{slidPreview}</Window>
+        {views.map((view, index) => (
+          <Window key={index}>{view}</Window>
+        ))}
       </WindowsWrapper>
     </PageWrapper>
   );
