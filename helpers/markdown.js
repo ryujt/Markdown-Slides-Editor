@@ -32,17 +32,23 @@ const findContentInTag = (openTag, closeTag, html) => {
   return founds;
 };
 
-const removeInlineStyle = (html) => {
-  const INLINE_STYLE_OPEN_TAG = `style="`;
-  const INLINE_STYLE_CLOSE_TAG = `"`;
+const setMermaidSvgStyle = (html) => {
+  const createElementFromHTML = (htmlString) => {
+    var div = document.createElement("div");
+    div.innerHTML = htmlString.trim();
+    return div.firstChild;
+  };
+  const convertElementToHTML = (element) => {
+    var div = document.createElement("div");
+    div.appendChild(element);
+    return div.innerHTML;
+  };
 
-  const style = findContentInTag(
-    INLINE_STYLE_OPEN_TAG,
-    INLINE_STYLE_CLOSE_TAG,
-    html,
-  )[0];
+  const element = createElementFromHTML(html);
+  element.setAttribute("width", "100%");
+  element.setAttribute("style", "100%");
 
-  return html.replace(style.raw, "");
+  return convertElementToHTML(element);
 };
 
 const findMermaidFromMarpHTML = (html) => {
@@ -81,7 +87,7 @@ export const pareMarkdownToHtml = async (markdown) => {
   const parseMermaid2HTML = async (id, mermaid) => {
     try {
       const { svg: svgGraph } = await mermaidAPI.render(id, mermaid);
-      return removeInlineStyle(svgGraph);
+      return setMermaidSvgStyle(svgGraph);
     } catch (e) {
       return e;
     }

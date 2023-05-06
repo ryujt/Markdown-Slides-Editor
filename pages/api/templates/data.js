@@ -139,6 +139,19 @@ const mermaidMarkdown = {
         "Cats" : 85.9
         "Rats" : 15
   `,
+  gitGraph: `
+  gitGraph
+    commit
+    commit
+    branch develop
+    checkout develop
+    commit
+    commit
+    checkout main
+    merge develop
+    commit
+    commit
+  `,
 };
 
 const mermaidTemplates = Object.keys(mermaidMarkdown).reduce((dict, key) => {
