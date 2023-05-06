@@ -2,7 +2,7 @@ import HtmlViewer from "features/HtmlViewer";
 import Layout from "features/Layout";
 import MarkdownEditor from "features/MarkdownEditor";
 import ToolBar from "features/Toolbar";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPage, editPage, fetchTemplates } from "redux/actions/pages";
 
@@ -33,21 +33,26 @@ const Editor = ({ markdowns, toolbar }) => {
 };
 
 const EditorReduxWrapper = () => {
-  const { pages, html, templates } = useSelector((state) => state.pages);
-
   const dispatch = useDispatch();
-
-  const onEditPage = ({ id, markdown }) => {
-    dispatch(editPage({ id, markdown }));
-  };
+  const { pages, html, templates } = useSelector((state) => state.pages);
 
   useEffect(() => {
     if (!templates) dispatch(fetchTemplates());
   }, []);
 
-  const onAddPageFromTemplate = (markdown) => {
-    dispatch(addPage({ markdown }));
-  };
+  const onEditPage = useCallback(
+    ({ id, markdown }) => {
+      dispatch(editPage({ id, markdown }));
+    },
+    [dispatch],
+  );
+
+  const onAddPageFromTemplate = useCallback(
+    (markdown) => {
+      dispatch(addPage({ markdown }));
+    },
+    [dispatch],
+  );
 
   return (
     <Editor

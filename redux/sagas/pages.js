@@ -83,7 +83,7 @@ function* fetchTemplates() {
 
 function* convertPageToHtml(pages) {
   const markdowns = pages.map((data) => data?.markdown);
-  const wholeMarkdown = markdowns.join("\n---\n");
+  const wholeMarkdown = markdowns.join("\n\n---\n\n");
   const html = yield call(pareMarkdownToHtml, wholeMarkdown);
   return html;
 }
