@@ -1,9 +1,8 @@
 import Icon from "components/Icon";
-import PageTemplateList from "containers/PageTemplateList";
-import { download, printIframe } from "helpers/file";
+import PageTemplateList from "features/Toolbar/PageTemplateList";
+import { download } from "helpers/file";
 import { openHtmlWindow } from "helpers/window";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 import { IconList, Wrapper } from "./styled";
 
@@ -12,12 +11,30 @@ const TOOL_TYPE = {
   templates: "templates",
 };
 
-const Tools = {
-  templates: () => <PageTemplateList />,
-};
+const ToolBar = ({
+  print,
+  githubLink,
+  templates,
+  onAddPageFromTemplate,
+  html,
+}) => {
+  const [Tools, setTools] = useState({});
 
-const ToolBar = () => {
-  const { html } = useSelector((state) => state.pages);
+  useEffect(() => {
+    setTools({
+      templates: () => (
+        <>
+          {templates && (
+            <PageTemplateList
+              templates={templates}
+              onClick={onAddPageFromTemplate}
+            />
+          )}
+        </>
+      ),
+    });
+  }, [templates, onAddPageFromTemplate]);
+
   const [type, setType] = useState(TOOL_TYPE.templates);
 
   const setTool = (newType) => {
@@ -26,10 +43,7 @@ const ToolBar = () => {
   };
 
   const openGithubLink = () => {
-    window.open(
-      "https://github.com/yushaing-frontend/Markdown-Slides-Editor",
-      "_blank",
-    );
+    window.open(githubLink, "_blank");
   };
 
   const Tool = Tools[type] || null;
@@ -39,7 +53,7 @@ const ToolBar = () => {
         <Icon.github onClick={openGithubLink} />
         <Icon.add onClick={() => setTool(TOOL_TYPE.templates)} />
         {html && <Icon.download onClick={() => download("slide", html)} />}
-        {html && <Icon.print onClick={printIframe.print} />}
+        {html && <Icon.print onClick={print} />}
         {html && <Icon.newTab onClick={() => openHtmlWindow(html)} />}
       </IconList>
       {Tool && <Tool />}

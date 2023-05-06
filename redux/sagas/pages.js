@@ -2,6 +2,8 @@ import * as pages from "api/pages";
 import {
   ACTION_ADD_SLIDE_PAGE,
   ACTION_ADD_SLIDE_PAGE_SUC,
+  ACTION_DELETE_SLIDE_PAGE,
+  ACTION_DELETE_SLIDE_PAGE_SUC,
   ACTION_EDIT_SLIDE_PAGE,
   ACTION_EDIT_SLIDE_PAGE_SUC,
   ACTION_FETCH_PAGE_TEMPLATES,
@@ -31,6 +33,20 @@ function* addPage({ markdown }) {
   const html = yield call(convertPageToHtml, newPages);
   yield put({
     type: ACTION_ADD_SLIDE_PAGE_SUC,
+    payload: {
+      pages: newPages,
+      html,
+    },
+  });
+}
+
+function* deletePage({ id }) {
+  const { pages } = yield select((state) => state.pages);
+
+  const newPages = pages.filter((page) => page?.id !== id);
+  const html = yield call(convertPageToHtml, newPages);
+  yield put({
+    type: ACTION_DELETE_SLIDE_PAGE_SUC,
     payload: {
       pages: newPages,
       html,
@@ -83,7 +99,7 @@ function* fetchTemplates() {
 
 function* convertPageToHtml(pages) {
   const markdowns = pages.map((data) => data?.markdown);
-  const wholeMarkdown = markdowns.join("\n---\n");
+  const wholeMarkdown = markdowns.join("\n\n---\n\n");
   const html = yield call(pareMarkdownToHtml, wholeMarkdown);
   return html;
 }
@@ -92,4 +108,5 @@ export default [
   takeEvery(ACTION_ADD_SLIDE_PAGE, addPage),
   takeEvery(ACTION_EDIT_SLIDE_PAGE, editPage),
   takeEvery(ACTION_FETCH_PAGE_TEMPLATES, fetchTemplates),
+  takeEvery(ACTION_DELETE_SLIDE_PAGE, deletePage),
 ];
