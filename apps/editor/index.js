@@ -4,7 +4,12 @@ import MarkdownEditor from "features/MarkdownEditor";
 import ToolBar from "features/Toolbar";
 import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPage, editPage, fetchTemplates } from "redux/actions/pages";
+import {
+  addPage,
+  deletePage,
+  editPage,
+  fetchTemplates,
+} from "redux/actions/pages";
 
 const Editor = ({ markdowns, toolbar }) => {
   const viewerRef = useRef(null);
@@ -42,6 +47,7 @@ const EditorReduxWrapper = () => {
 
   const onEditPage = useCallback(
     ({ id, markdown }) => {
+      if (markdown === null) return dispatch(deletePage({ id }));
       dispatch(editPage({ id, markdown }));
     },
     [dispatch],

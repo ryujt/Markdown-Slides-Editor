@@ -1,5 +1,6 @@
 import {
   ACTION_ADD_SLIDE_PAGE_SUC,
+  ACTION_DELETE_SLIDE_PAGE_SUC,
   ACTION_EDIT_SLIDE_PAGE_SUC,
   ACTION_FETCH_PAGE_TEMPLATES_SUC,
 } from "constants/pages";
@@ -16,6 +17,7 @@ const pages = (state = initialState, action) =>
     switch (action.type) {
       case ACTION_ADD_SLIDE_PAGE_SUC:
       case ACTION_EDIT_SLIDE_PAGE_SUC:
+      case ACTION_DELETE_SLIDE_PAGE_SUC:
         draft.pages = action.payload.pages;
         draft.html = action.payload.html;
 

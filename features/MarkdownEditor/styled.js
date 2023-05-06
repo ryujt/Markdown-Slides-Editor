@@ -23,3 +23,9 @@ export const TextAreaWrapper = styled.div`
     padding: 30px;
   }
 `;
+
+export const Delete = styled.div`
+  z-index: 999;
+  position: absolute;
+  transform: translate(0, -100%);
+`;

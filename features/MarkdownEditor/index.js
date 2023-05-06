@@ -1,6 +1,7 @@
+import Icons from "components/Icon";
 import dynamic from "next/dynamic";
 
-import { TextAreaWrapper, Wrapper } from "./styled";
+import { Delete, TextAreaWrapper, Wrapper } from "./styled";
 
 const AceEditor = dynamic(() => import("./AceEditor/index.js"), {
   ssr: false,
@@ -10,6 +11,9 @@ const TextArea = ({ markdown, onChange }) => {
   return (
     <TextAreaWrapper>
       <AceEditor value={markdown} onChange={onChange} />
+      <Delete>
+        <Icons.trashcan onClick={() => onChange(null)} />
+      </Delete>
     </TextAreaWrapper>
   );
 };
