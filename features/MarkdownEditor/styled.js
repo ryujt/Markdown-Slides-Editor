@@ -4,8 +4,6 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 10.25px;
-  overflow: auto;
-  height: 100%;
 `;
 
 export const TextAreaWrapper = styled.div`
@@ -22,4 +20,10 @@ export const TextAreaWrapper = styled.div`
     resize: none;
     padding: 30px;
   }
+`;
+
+export const Delete = styled.div`
+  z-index: 999;
+  position: absolute;
+  transform: translate(0, -100%);
 `;

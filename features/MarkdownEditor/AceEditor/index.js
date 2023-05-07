@@ -2,11 +2,15 @@ import "ace-builds/src-noconflict/ace";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AceEditor from "react-ace";
 
 const MyAceEditor = ({ value, onChange }) => {
-  const [text, setText] = useState(value);
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    setText(value);
+  }, [value]);
 
   return (
     <AceEditor

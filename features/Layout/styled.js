@@ -21,5 +21,5 @@ export const Window = styled.div`
   margin: 10px;
   width: 50%;
   height: 100%;
-  overflow: hidden;
+  overflow-y: scroll;
 `;
