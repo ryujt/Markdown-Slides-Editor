@@ -5,6 +5,7 @@ const HtmlViewer = ({ html }, ref) => {
   const [iframeHeight, setIframeHeight] = useState(null);
 
   useEffect(() => {
+    if (!ref) return;
     ref.current = {
       iframe: iframeRef.current,
       print: () => {

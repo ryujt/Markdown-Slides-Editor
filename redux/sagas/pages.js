@@ -11,7 +11,7 @@ import {
 } from "constants/pages";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 
-import { pareMarkdownToHtml } from "../../helpers/markdown";
+import { pagesToMarkdown, pareMarkdownToHtml } from "../../helpers/markdown";
 
 const newId = (() => {
   let counter = 0;
@@ -98,8 +98,7 @@ function* fetchTemplates() {
 }
 
 function* convertPageToHtml(pages) {
-  const markdowns = pages.map((data) => data?.markdown);
-  const wholeMarkdown = markdowns.join("\n\n---\n\n");
+  const wholeMarkdown = pagesToMarkdown(pages);
   const html = yield call(pareMarkdownToHtml, wholeMarkdown);
   return html;
 }
