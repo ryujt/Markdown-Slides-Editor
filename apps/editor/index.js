@@ -2,6 +2,7 @@ import HtmlViewer from "features/HtmlViewer";
 import Layout from "features/Layout";
 import MarkdownEditor from "features/MarkdownEditor";
 import ToolBar from "features/Toolbar";
+import { pagesToMarkdown } from "helpers/markdown";
 import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -23,6 +24,7 @@ const Editor = ({ markdowns, toolbar }) => {
           templates={toolbar.templates}
           onAddPageFromTemplate={toolbar.onAddPageFromTemplate}
           html={toolbar.htmlForExport}
+          markdown={toolbar.markdown}
         />
       }
       views={[
@@ -70,6 +72,7 @@ const EditorReduxWrapper = () => {
         templates,
         onAddPageFromTemplate,
         htmlForExport: html,
+        markdown: pagesToMarkdown(pages),
       }}
       markdowns={{ pages, onEditPage, html }}
     />

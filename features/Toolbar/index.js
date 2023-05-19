@@ -1,7 +1,7 @@
 import Icon from "components/Icon";
 import PageTemplateList from "features/Toolbar/PageTemplateList";
 import { download } from "helpers/file";
-import { openHtmlWindow } from "helpers/window";
+import { encodeString } from "helpers/pako";
 import { useEffect, useState } from "react";
 
 import { IconList, Wrapper } from "./styled";
@@ -17,6 +17,7 @@ const ToolBar = ({
   templates,
   onAddPageFromTemplate,
   html,
+  markdown,
 }) => {
   const [Tools, setTools] = useState({});
 
@@ -46,6 +47,12 @@ const ToolBar = ({
     window.open(githubLink, "_blank");
   };
 
+  const shareLink = (markdown) => {
+    const encoded = encodeString(markdown);
+    const url = `${window.location}/share?data=${encoded}`;
+    window.open(url, "_blank");
+  };
+
   const Tool = Tools[type] || null;
   return (
     <Wrapper>
@@ -54,7 +61,7 @@ const ToolBar = ({
         <Icon.add onClick={() => setTool(TOOL_TYPE.templates)} />
         {html && <Icon.download onClick={() => download("slide", html)} />}
         {html && <Icon.print onClick={print} />}
-        {html && <Icon.newTab onClick={() => openHtmlWindow(html)} />}
+        {html && <Icon.newTab onClick={() => shareLink(markdown)} />}
       </IconList>
       {Tool && <Tool />}
     </Wrapper>

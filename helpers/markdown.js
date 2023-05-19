@@ -80,6 +80,12 @@ const getHTMLFromTemplate = (body, style) => {
   return html;
 };
 
+export const pagesToMarkdown = (pages) => {
+  const markdowns = pages.map((data) => data?.markdown);
+  const wholeMarkdown = markdowns.join("\n\n---\n\n");
+  return wholeMarkdown;
+};
+
 export const pareMarkdownToHtml = async (markdown) => {
   const marp = new Marp();
   const { html, css } = marp.render(markdown);
