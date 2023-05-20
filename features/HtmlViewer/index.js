@@ -18,6 +18,7 @@ const HtmlViewer = ({ html }, ref) => {
 
   const setScrollHeight = () => {
     const iframe = iframeRef.current;
+    if (!iframe) return;
     const contentHeight = iframe.contentWindow.document.body.scrollHeight;
     setIframeHeight(contentHeight);
   };
