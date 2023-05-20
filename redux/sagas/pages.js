@@ -9,16 +9,10 @@ import {
   ACTION_FETCH_PAGE_TEMPLATES,
   ACTION_FETCH_PAGE_TEMPLATES_SUC,
 } from "constants/pages";
+import uuid from "helpers/uuid";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 
 import { pagesToMarkdown, pareMarkdownToHtml } from "../../helpers/markdown";
-
-const newId = (() => {
-  let counter = 0;
-  return () => {
-    return counter++;
-  };
-})();
 
 function* addPage({ markdown }) {
   const { pages } = yield select((state) => state.pages);
@@ -27,7 +21,7 @@ function* addPage({ markdown }) {
     ...pages,
     {
       markdown,
-      id: newId(),
+      id: uuid(),
     },
   ];
   const html = yield call(convertPageToHtml, newPages);

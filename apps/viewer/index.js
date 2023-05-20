@@ -1,28 +1,9 @@
+import { SHARE_BASE64_MARKDOWN_KEY } from "constants/share";
 import HtmlViewer from "features/HtmlViewer";
-import { decodeString } from "helpers/pako";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-
-import { pareMarkdownToHtml } from "../../helpers/markdown";
+import useBase64FromQueryString from "hooks/useQueryString";
 
 const Viewer = () => {
-  const [html, setHTML] = useState("");
-  const router = useRouter();
-  const {
-    query: { data },
-  } = router;
-
-  useEffect(() => {
-    try {
-      if (data) {
-        const decoded = decodeString(data);
-        pareMarkdownToHtml(decoded).then(setHTML);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }, [data]);
-
+  const { html } = useBase64FromQueryString(SHARE_BASE64_MARKDOWN_KEY);
   return <HtmlViewer html={html} />;
 };
 
