@@ -1,4 +1,5 @@
 import Icon from "components/Icon";
+import { SHARE_BASE64_MARKDOWN_KEY, SHARE_PAGE } from "constants/share";
 import PageTemplateList from "features/Toolbar/PageTemplateList";
 import { download } from "helpers/file";
 import { encodeString } from "helpers/pako";
@@ -49,7 +50,7 @@ const ToolBar = ({
 
   const shareLink = (markdown) => {
     const encoded = encodeString(markdown);
-    const url = `${window.location}/share?data=${encoded}`;
+    const url = `./${SHARE_PAGE}?${SHARE_BASE64_MARKDOWN_KEY}=${encoded}`;
     window.open(url, "_blank");
   };
 
