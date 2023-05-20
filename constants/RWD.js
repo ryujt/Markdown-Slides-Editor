@@ -1,6 +1,6 @@
 export const mobile = (text) => {
   return `
-    @media (max-width: 1200px) {
+    @media only screen and (orientation: portrait) {
         ${text}
     }
     `;
