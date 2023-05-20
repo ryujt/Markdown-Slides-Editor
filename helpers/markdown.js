@@ -80,9 +80,14 @@ const getHTMLFromTemplate = (body, style) => {
   return html;
 };
 
+const BREAK_PAGE_SYMBOL = "\n\n---\n\n";
+export const markdownToPages = (markdown) => {
+  return markdown.split(BREAK_PAGE_SYMBOL);
+};
+
 export const pagesToMarkdown = (pages) => {
   const markdowns = pages.map((data) => data?.markdown);
-  const wholeMarkdown = markdowns.join("\n\n---\n\n");
+  const wholeMarkdown = markdowns.join(BREAK_PAGE_SYMBOL);
   return wholeMarkdown;
 };
 
