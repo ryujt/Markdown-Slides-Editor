@@ -2,6 +2,7 @@ import { mobile } from "constants/RWD";
 import styled from "styled-components";
 
 export const PageWrapper = styled.div`
+  background-color: white;
   display: flex;
   flex-direction: row;
   height: 100vh;
