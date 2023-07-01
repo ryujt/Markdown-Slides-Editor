@@ -1,4 +1,5 @@
 import Viewer from "apps/viewer";
+import { decodeString } from "helpers/pako";
 import Head from "next/head";
 
 function Header({ title, ogTitle, ogImage, ogDescription }) {
@@ -24,8 +25,9 @@ export default function App(props) {
 }
 
 export async function getServerSideProps({ query }) {
-  const { title, ogTitle, ogImage, ogDescription } = query;
-
+  const { meta } = query;
+  const decodedMeta = JSON.parse(decodeString(meta));
+  const { title, ogTitle, ogImage, ogDescription } = decodedMeta;
   return {
     props: {
       title: title || "Default Title",

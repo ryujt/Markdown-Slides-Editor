@@ -11,6 +11,8 @@ const files = {
   print: `/static/icons/print.svg`,
   github: `/static/icons/github.svg`,
   trashcan: `/static/icons/trashcan.svg`,
+  copy: `/static/icons/copy.svg`,
+  link: `/static/icons/link.svg`,
 };
 
 const Icons = Object.keys(files).reduce((acc, key) => {

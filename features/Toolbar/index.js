@@ -1,5 +1,6 @@
 import Icon from "components/Icon";
 import { SHARE_BASE64_MARKDOWN_KEY, SHARE_PAGE } from "constants/share";
+import MetaInput from "features/MetaInput";
 import PageTemplateList from "features/Toolbar/PageTemplateList";
 import { download } from "helpers/file";
 import { encodeString } from "helpers/pako";
@@ -48,9 +49,10 @@ const ToolBar = ({
     window.open(githubLink, "_blank");
   };
 
-  const shareLink = (markdown) => {
-    const encoded = encodeString(markdown);
-    const url = `./${SHARE_PAGE}?${SHARE_BASE64_MARKDOWN_KEY}=${encoded}`;
+  const shareLink = `./${SHARE_PAGE}?${SHARE_BASE64_MARKDOWN_KEY}=${encodeString(
+    markdown,
+  )}`;
+  const openLink = (url) => {
     window.open(url, "_blank");
   };
 
@@ -62,7 +64,11 @@ const ToolBar = ({
         <Icon.add onClick={() => setTool(TOOL_TYPE.templates)} />
         {html && <Icon.download onClick={() => download("slide", html)} />}
         {html && <Icon.print onClick={print} />}
-        {html && <Icon.newTab onClick={() => shareLink(markdown)} />}
+        {html && (
+          <MetaInput url={shareLink} onSubmit={openLink}>
+            <Icon.newTab />
+          </MetaInput>
+        )}
       </IconList>
       {Tool && <Tool />}
     </Wrapper>
