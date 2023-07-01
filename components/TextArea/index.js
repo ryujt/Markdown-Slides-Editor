@@ -24,6 +24,7 @@ const TextArea = ({ onChange, defaultValue, ...props }) => {
       value={value}
       onBlur={handleBlur}
       onChange={handleChange}
+      wrap="off"
     />
   );
 };
