@@ -81,7 +81,7 @@ function* fetchTemplates() {
     const key = keys[index];
     templates[key] = {
       raw: raws[key],
-      html: yield call(pareMarkdownToHtml, raws[key]),
+      html: yield call(pareMarkdownToHtml, raws[key], true),
     };
   }
 

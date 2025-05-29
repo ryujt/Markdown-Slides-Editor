@@ -61,16 +61,34 @@ mermaidAPI.initialize({
   startOnLoad: true,
 });
 
-const getHTMLFromTemplate = (body, style) => {
+const getHTMLFromTemplate = (body, style, plainStyle = false) => {
   const html = `
   <!DOCTYPE html>
     <title>Preview</title>
   <html>
     <body>
       <style>
-      body{
-        margin:0px;
-      }
+      ${plainStyle ? `
+        body {
+          margin: 0px;
+          padding: 0px;
+          background: white;
+        }
+      ` : `
+        body{
+          margin:0px;
+          padding: 25px;
+          background-color: #f5f5f5;
+        }
+        .marpit > svg > foreignObject > section,
+        .marpit > section {
+          width: calc(100% - 40px) !important;
+          margin: 20px !important;
+          box-shadow: 0 0 20px rgba(0,0,0,0.15) !important;
+          border-radius: 5px !important;
+          background-color: white !important;
+        }
+      `}
       ${style}
       </style>
       ${body}
@@ -91,7 +109,7 @@ export const pagesToMarkdown = (pages) => {
   return wholeMarkdown;
 };
 
-export const pareMarkdownToHtml = async (markdown) => {
+export const pareMarkdownToHtml = async (markdown, plainStyle = false) => {
   const marp = new Marp();
   const { html, css } = marp.render(markdown);
 
@@ -120,5 +138,5 @@ export const pareMarkdownToHtml = async (markdown) => {
     html,
   );
 
-  return getHTMLFromTemplate(content, css);
+  return getHTMLFromTemplate(content, css, plainStyle);
 };
